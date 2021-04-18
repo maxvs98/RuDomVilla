@@ -1,0 +1,21 @@
+.subscribe__block {
+	padding: 30px;
+	width: 100%;
+	background-color: #00b74a;
+	margin-bottom: 0;
+}
+
+.form__control {
+	background: #fff;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+.form__button{
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+
+.input-group {
+	max-width: 500px;
+}

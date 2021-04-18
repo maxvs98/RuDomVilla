@@ -1,0 +1,9 @@
+.navbar__menu {
+	margin-bottom: 0;
+}
+
+.navbar__menu li {
+	list-style: none;
+	display: inline-block;
+	padding: 0 5px;
+}

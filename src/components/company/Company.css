@@ -1,0 +1,23 @@
+.company__card {
+	height: 450px;
+	max-height: 450px;
+	min-height: 450px;
+}
+
+.card__logo {
+	text-align: center;
+}
+
+.company__card-logo {
+	max-width: 200px;
+	height: auto;
+	max-height: 400px;
+	margin-top: -30px;
+	border: 1px solid white;
+}
+
+.card__company-description {
+	max-height: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

@@ -1,0 +1,19 @@
+.sidenav-menu {
+    padding: 0;
+    margin: 0;
+}
+
+.sidenav li {
+	list-style-type: none;
+	padding: 10px;
+}
+
+.sidenav-menu a {
+	text-decoration: none;
+}
+
+.sidenav-menu li.active {
+	background-color: #00b74a;
+	color: #fff;
+
+}

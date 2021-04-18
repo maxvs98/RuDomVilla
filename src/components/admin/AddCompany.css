@@ -1,0 +1,33 @@
+.company__logo{
+	margin-bottom: 20px;
+	border: 1px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 120px;
+}
+
+.company__buttons {
+	height: 50%;
+	width: 40px;
+	/* transition: transform .2s; */
+	transition: .1s;
+	cursor: pointer;
+}
+
+.company__buttons:hover {
+	 /* transform: scale(1.5); */
+	font-size: 20px;
+
+	transition: .1s;
+}
+
+.brtr{
+	border-top-right-radius: .25rem;
+}
+
+.brbr{
+	border-bottom-right-radius: .25rem;
+}

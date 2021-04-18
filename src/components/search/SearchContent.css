@@ -1,0 +1,28 @@
+.search__content-block {
+	height: 220px;
+	width: 100%;
+}
+
+.search__content-block img{
+	height: 200px;
+	max-height: 200px;
+	width: auto;
+}
+
+.search__block-seller {
+	/* width: 200px;
+	height: auto; */
+	text-align: center;
+}
+
+.seller__logo {
+	max-width: 200px;
+	height: auto;
+	max-height: 400px;
+	/* margin-top: -25px; */
+	border: 1px solid white;
+}
+
+.bold {
+	font-weight: bold;
+}

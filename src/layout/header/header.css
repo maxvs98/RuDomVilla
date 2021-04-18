@@ -1,0 +1,56 @@
+.header {
+	padding: 20px 0;
+	text-align: center;
+}
+
+.header__logo {
+	text-align: left;
+	margin: 0;
+}
+
+.header__logo img {
+	width: 100px;
+	height: 100px;
+}
+
+.header__title {
+	font-weight: 600;
+	text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+	max-width: 550px;
+	width: 530px;
+}
+
+.header__social-icon {
+	margin: 3px;
+	font-size: 25px;
+}
+
+.header__location {
+	height: 100%;
+	max-height: 65px;
+}
+
+.header__location-icon {
+	color: #f39393;
+	margin: 3px;
+	font-size: 25px;
+}
+
+.title__black {
+
+}
+
+.title__orange {
+	color:coral;
+}
+
+.title__green {
+	color: #00b74a ;
+}
+
+.title_left {
+	text-align: left;
+}
+.title_right {
+	text-align: right;
+}
