@@ -41,7 +41,9 @@ function AllCompany(props) {
 				console.log( error.response.data.error )
 				toast.error(error.response.data.error) //Please Authenticate or whatever returned from server
 			if(error.response.status === 401){
-				<Redirect to="/dashboard/login" />
+				/* eslit-disable */
+				return <Redirect to="/dashboard/login" />
+				/* eslint-enable */
 			}
 			})
 			/* setSuccess(true)

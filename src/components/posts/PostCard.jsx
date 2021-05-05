@@ -2,28 +2,28 @@ import React from 'react';
 import { MDBRow, MDBCol,  MDBBtn  } from 'mdb-react-ui-kit';
 import server from '../../services/servUrl';
 
-function ArticleCard({article}) {
-  const url = "/article/";
+function PostCard({post}) {
+  const url = "/post/";
 	return (
 		<>
-			<MDBRow key={ article._id }>
+			<MDBRow key={ post._id }>
 				<MDBCol lg="5" xl="4">
 					<div className="rounded z-depth-1-half mb-lg-0 mb-4">
 						<img
 							className="img-fluid img__blog-news"
-							src={ server.url + article.imageSrc }
+							src={ server.url + post.imageSrc }
 							alt=""
 						/>
 					</div>
 				</MDBCol>
 				<MDBCol lg="7" xl="8">
 					<h3 className="font-weight-bold mb-3 p-0">
-					<strong>{ article.title }</strong>
+					<strong>{ post.title }</strong>
 					</h3>
 					<p className="dark-grey-text">
-					{article.text}
+					{post.text}
 					</p>
-					<MDBBtn  href={ url + article._id } color="success" size="md">
+					<MDBBtn  href={ url + post._id } color="success" size="md">
 					Читать
 					</MDBBtn>
 				</MDBCol>
@@ -33,4 +33,4 @@ function ArticleCard({article}) {
 	)
 }
 
-export default ArticleCard
+export default PostCard

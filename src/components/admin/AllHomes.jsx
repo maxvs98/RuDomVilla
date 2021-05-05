@@ -50,7 +50,7 @@ function AllHomes(props) {
 				console.log( error.response.data.error )
 				toast.error(error.response.data.error) //Please Authenticate or whatever returned from server
 			if(error.response.status === 401){
-				<Redirect to="/dashboard/login" />
+				return <Redirect to="/dashboard/login" />
 			}
 			})
 			/* setSuccess(true)

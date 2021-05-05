@@ -10,8 +10,8 @@ import Subscribe from './layout/subscribe/Subscribe';
 import Login from './pages/admin/Login';
 import Admin from './pages/admin/Admin';
 import Company from './pages/Company';
-import Articles from './pages/Articles';
-import Article from './pages/Article';
+import Posts from './pages/Posts';
+import Post from './pages/Post';
 import './mdb.min.css';
 
 function App() {
@@ -23,10 +23,10 @@ function App() {
 				<Route exact path='/search' component={Search} />
 				<Route exact path='/housecard/:id' component={HouseCard} />
 				<Route exact path='/company' component={Company} />
-				<Route exact path='/articles' component={Articles} />
+				<Route exact path='/posts' component={Posts} />
 				<Route exact path='/dashboard/login' component={Login} />
 				<Route exact path='/dashboard/' component={Admin} />
-				<Route exact path='/article/:id' component={(props) => (<Article {...props}/>) } />
+				<Route exact path='/post/:id' component={(props) => (<Post {...props}/>) } />
 			</Switch>
 			<Subscribe />
 			<Footer />

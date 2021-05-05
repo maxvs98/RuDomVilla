@@ -19,6 +19,7 @@ function Admin({history}) {
 	const [ classActive, setClassActive ] = useState( 'adm_static' )
 	const [ addCompanyShow, setAddCompanyShow ] = useState( false );
 	const [ addHomeShow, setAddHomeShow ] = useState( false );
+	const [ addPostShow, setAddPostShow ] = useState( false );
 	const [ isLogin, setIsLogin ] = useState(true)
 
 
@@ -52,7 +53,8 @@ function Admin({history}) {
 
 	const handleSubmit = (query) => {
 		setAddCompanyShow( query )
-		setAddHomeShow(query)
+		setAddHomeShow( query )
+		setAddPostShow( query )
 
 	}
 
@@ -66,6 +68,11 @@ function Admin({history}) {
 		<AddHome handleSubmit />
 	</div>	)
 
+	const addPostBlock = () => ( <div className="">
+		<MDBBtn onClick={ () => handleSubmit( false ) } color="primary" className="btn mb-4">Закрыть</MDBBtn>
+		<AddPost handleSubmit />
+	</div>	)
+
 	return (
 		<Container>
 			<Row>
@@ -76,7 +83,7 @@ function Admin({history}) {
 							<li onClick={() => filterHandler('adm_static')} className={classActive === 'adm_static' ? 'active' : ''}>Статистика</li>
 							<li onClick={() => filterHandler('adm_company')} className={classActive === 'adm_company' ? 'active' : ''}>Компании</li>
 							<li onClick={() => filterHandler('adm_home')} className={classActive === 'adm_home' ? 'active' : ''}>Дома</li>
-							<li onClick={() => filterHandler('adm_article')} className={classActive === 'adm_article' ? 'active' : ''}>Статьи</li>
+							<li onClick={() => filterHandler('adm_post')} className={classActive === 'adm_post' ? 'active' : ''}>Статьи</li>
 							<li onClick={() => filterHandler('adm_show')} className={classActive === 'adm_show' ? 'active' : ''}>Выставки</li>
 							<li onClick={() => filterHandler('adm_contacts')} className={classActive === 'adm_contacts' ? 'active' : ''}>Контакты</li>
 							<li onClick={() => filterHandler('adm_settings')} className={classActive === 'adm_settings' ? 'active' : ''}>Настройки</li>
@@ -115,11 +122,14 @@ function Admin({history}) {
 						</div>
 					}
 
-					{ classActive === 'adm_article' &&
+					{ classActive === 'adm_post' &&
 						<div className=" pt-2">
 						<h1>Статьи</h1>
+						<div className="post__add">
+							{addPostShow ? addPostBlock() : <MDBBtn onClick={ () => setAddPostShow( true ) } color="success" className="btn">Добавить статью</MDBBtn> }
+						</div>
 						<hr />
-
+							<AllPosts />
 						</div>
 					}
 

@@ -8,36 +8,36 @@ import {
 
 function BlogSingle() {
 
-	const [ article, setArticle ] = useState( [] )
+	const [ post, setPost ] = useState( [] )
 
 	let { id } = useParams();
 	useEffect(() => {
-		const handleArticle = async () => {
+		const handlePost = async () => {
 
 			const response = await api.get( '/api/post/' + id );
-			setArticle( response.data );
+			setPost( response.data );
 		}
-		handleArticle();
+		handlePost();
 	}, [id] );
 
 
 	return (
-    <MDBRow key={ article._id }>
+    <MDBRow key={ post._id }>
       <MDBCol lg="5" xl="4">
         <div className="rounded z-depth-1-half mb-lg-0 mb-4">
           <img
             className="img-fluid img__blog-news"
-            src={ server.url + article.imageSrc }
+            src={ server.url + post.imageSrc }
             alt=""
           />
         </div>
       </MDBCol>
       <MDBCol lg="7" xl="8">
         <h3 className="font-weight-bold mb-3 p-0">
-        <strong>{ article.title }</strong>
+        <strong>{ post.title }</strong>
         </h3>
         <p className="dark-grey-text">
-        {article.text}
+        {post.text}
         </p>
       </MDBCol>
     </MDBRow>

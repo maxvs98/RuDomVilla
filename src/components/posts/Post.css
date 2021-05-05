@@ -1,14 +1,14 @@
-.article__card {
+.post__card {
 	height: 450px;
 	max-height: 450px;
 	min-height: 450px;
 }
 
-.article__logo {
+.post__logo {
 	text-align: center;
 }
 
-.article__card-logo {
+.post__card-logo {
 	max-width: 200px;
 	height: auto;
 	max-height: 400px;
@@ -16,7 +16,7 @@
 	border: 1px solid white;
 }
 
-.article__company-description {
+.post__company-description {
 	max-height: 200px;
 	overflow: hidden;
 	text-overflow: ellipsis;
