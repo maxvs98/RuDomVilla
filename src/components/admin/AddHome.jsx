@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import api from '../../services/api'
 
 toast.configure()
-function AddCompany({history}) {
+function AddHome({history, setPropsUpdate, propsUpdate}) {
 	const [ isLogin, setIsLogin ] = useState( true )
 	const [ name, setName ] = useState('')
 	const [ countryId, setCountryId ] = useState( '' )
@@ -240,6 +240,7 @@ function AddCompany({history}) {
 			if (house) {
 				resetForm()
 				toast.success('Успешно добавлен')
+        setPropsUpdate(propsUpdate ? false : true)
 			} else {
 				const {message} = response.data
 					/* setError(true)
@@ -821,13 +822,10 @@ function AddCompany({history}) {
 					</div>
 					<div id='previewSchemeImage' style={{backgroundImage: `url(${previewSchemeImage})`}} className={schemeImageSrc ? 'company__logo' : ''}></div>
 					<div id='previewImage' style={{backgroundImage: `url(${previewImage})`}} className={image ? 'company__logo' : ''}></div>
-
 				</Col>
 			</Row>
-
-
 		</Container>
 	)
 }
 
-export default AddCompany
+export default AddHome

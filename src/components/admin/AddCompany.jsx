@@ -6,7 +6,7 @@ import api from '../../services/api'
 import './AddCompany.css'
 
 toast.configure()
-function AddCompany({history}) {
+function AddCompany({history, setPropsUpdate, propsUpdate}) {
 	const [ name, setName ] = useState('')
 	const [ country, setCountry ] = useState( '' )
 	const [ countryName, setCountryName ] = useState([])
@@ -115,6 +115,7 @@ function AddCompany({history}) {
 			if (company) {
 				resetForm()
 				toast.success('Компания добавлена')
+        setPropsUpdate(propsUpdate ? false : true)
 			} else {
 				const { message } = response.data
 				toast.error(message)

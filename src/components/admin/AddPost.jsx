@@ -6,7 +6,7 @@ import api from '../../services/api'
 import './AddCompany.css'
 
 toast.configure()
-function AddPost({history}) {
+function AddPost({history, setPropsUpdate, propsUpdate}) {
 	const [ title, setTitle ] = useState('')
 	const [ text, setText ] = useState( '' )
 	const [ imageSrc, setImageSrc ] = useState(null)
@@ -74,6 +74,7 @@ function AddPost({history}) {
 			if (post) {
 				resetForm()
 				toast.success('Статья добавлена')
+        setPropsUpdate(propsUpdate ? false : true)
 			} else {
 				const { message } = response.data
 				toast.error(message)

@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { MDBBtn } from 'mdb-react-ui-kit';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import './Admin.css'
-import AddCompany from '../../components/admin/AddCompany'
 import AllCompany from '../../components/admin/AllCompany'
-import AddHome from '../../components/admin/AddHome'
 import AllHomes from '../../components/admin/AllHomes'
-import AddPost from '../../components/admin/AddPost'
 import AllPosts from './../../components/admin/AllPosts';
 
 import api from '../../services/api'
@@ -17,9 +13,6 @@ function Admin({history}) {
 
 
 	const [ classActive, setClassActive ] = useState( 'adm_static' )
-	const [ addCompanyShow, setAddCompanyShow ] = useState( false );
-	const [ addHomeShow, setAddHomeShow ] = useState( false );
-	const [ addPostShow, setAddPostShow ] = useState( false );
 	const [ isLogin, setIsLogin ] = useState(true)
 
 
@@ -51,27 +44,6 @@ function Admin({history}) {
 
 	}
 
-	const handleSubmit = (query) => {
-		setAddCompanyShow( query )
-		setAddHomeShow( query )
-		setAddPostShow( query )
-
-	}
-
-	const addCompanyBlock = () => ( <div className="">
-		<MDBBtn onClick={ () => handleSubmit( false ) } color="primary" className="btn mb-4">Закрыть</MDBBtn>
-		<AddCompany handleSubmit />
-	</div> )
-
-	const addHomeBlock = () => ( <div className="">
-		<MDBBtn onClick={ () => handleSubmit( false ) } color="primary" className="btn mb-4">Закрыть</MDBBtn>
-		<AddHome handleSubmit />
-	</div>	)
-
-	const addPostBlock = () => ( <div className="">
-		<MDBBtn onClick={ () => handleSubmit( false ) } color="primary" className="btn mb-4">Закрыть</MDBBtn>
-		<AddPost handleSubmit />
-	</div>	)
 
 	return (
 		<Container>
@@ -104,10 +76,7 @@ function Admin({history}) {
 						<div className=" pt-2">
 						<h1>Компании</h1>
 						<hr />
-						<div className="company__add">
-							{addCompanyShow ? addCompanyBlock() : <MDBBtn onClick={ () => setAddCompanyShow( true ) } color="success" className="btn">Добавить компанию</MDBBtn> }
-						</div>
-						<AllCompany addCompanyShow />
+						<AllCompany/>
 						</div>
 					}
 
@@ -115,21 +84,15 @@ function Admin({history}) {
 						<div className=" pt-2">
 						<h1>Дома</h1>
 						<hr />
-						<div className="home__add">
-							{addHomeShow ? addHomeBlock() : <MDBBtn onClick={ () => setAddHomeShow( true ) } color="success" className="btn">Добавить дом</MDBBtn> }
-						</div>
-						<AllHomes setAddHomeShow />
+						<AllHomes/>
 						</div>
 					}
 
 					{ classActive === 'adm_post' &&
 						<div className=" pt-2">
 						<h1>Статьи</h1>
-						<div className="post__add">
-							{addPostShow ? addPostBlock() : <MDBBtn onClick={ () => setAddPostShow( true ) } color="success" className="btn">Добавить статью</MDBBtn> }
-						</div>
 						<hr />
-							<AllPosts />
+						<AllPosts />
 						</div>
 					}
 

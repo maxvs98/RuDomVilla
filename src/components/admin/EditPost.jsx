@@ -1,9 +1,9 @@
-import React, { useState, useMemo, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import api from '../../services/api'
-import './AddCompany.css'
+import api from '../../services/api';
+import './AddCompany.css';
 import {
   Modal, ModalHeader, ModalBody,
 } from 'reactstrap';
@@ -12,8 +12,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
 
 toast.configure()
-function EditPost({history, post}) {
+function EditPost({history, post, setPropsUpdate, propsUpdate}) {
 	const [ modal, setModal ] = useState(false)
+	const [ id, setId ] = useState(post._id)
 	const [ title, setTitle ] = useState(post.title)
 	const [ text, setText ] = useState( post.text )
 	const [ imageSrc, setImageSrc ] = useState(post.imageSrc)
@@ -43,6 +44,7 @@ function EditPost({history, post}) {
 	}, [history, isLogin] )
 
 	const resetForm = () => {
+		setId(post._id)
 		setTitle(post.title)
 		setText(post.text)
 		setImageSrc(post.imageSrc)
@@ -61,6 +63,7 @@ function EditPost({history, post}) {
 		evt.preventDefault()
 		toggle()
 		const postData = new FormData()
+		postData.append('_id', id)
 		postData.append('title', title)
 		postData.append('text', text)
 		postData.append('imageSrc', imageSrc)
@@ -85,6 +88,7 @@ function EditPost({history, post}) {
 			if (post) {
 				resetForm()
 				toast.success('Статья изменена')
+  			setPropsUpdate(propsUpdate ? false : true)
 			} else {
 				const { message } = response.data
 				toast.error(message)
