@@ -1,3 +1,6 @@
+a .seller__name {
+	color: #4f4f4f;
+}
 .search__content-block {
 	height: 220px;
 	width: 100%;
@@ -16,11 +19,15 @@
 }
 
 .seller__logo {
-	max-width: 200px;
+	max-width: 50px !important;
 	height: auto;
-	max-height: 400px;
+	max-height: 200px !important;
 	/* margin-top: -25px; */
 	border: 1px solid white;
+}
+
+.seller__name {
+	margin-left: 25px;
 }
 
 .bold {

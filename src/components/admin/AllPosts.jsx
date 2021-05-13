@@ -39,7 +39,7 @@ function AllPosts(props) {
 
 	const addPostBlock = () => ( <div className="">
 		<MDBBtn onClick={ () => handleSubmit( false ) } color="primary" className="btn mb-4">Закрыть</MDBBtn>
-		<AddPost handleSubmit setPropsUpdate={setPropsUpdate} propsUpdate={propsUpdate} />
+		<AddPost handleSubmit setPropsUpdate={setPropsUpdate} propsUpdate={propsUpdate} setAddPostShow={setAddPostShow} />
 	</div>	)
 
 	const deletePostHandler = async (postId) => {
@@ -98,7 +98,7 @@ function AllPosts(props) {
 						<Card className="shadow-1-strong mb-2" key={ post._id }>
 							<Row className="g-0">
 								<Col md={2} className="d-flex align-items-center">
-									<Card.Img variant="left" src={server.url + post.imageSrc} />
+									<Card.Img variant="left" src={server.url + post.imageSrc[0]} />
 								</Col>
 
 

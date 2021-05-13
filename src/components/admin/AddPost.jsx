@@ -6,10 +6,10 @@ import api from '../../services/api'
 import './AddCompany.css'
 
 toast.configure()
-function AddPost({history, setPropsUpdate, propsUpdate}) {
+function AddPost({history, setPropsUpdate, propsUpdate, setAddPostShow}) {
 	const [ title, setTitle ] = useState('')
 	const [ text, setText ] = useState( '' )
-	const [ imageSrc, setImageSrc ] = useState(null)
+	const [ imageSrc, setImageSrc ] = useState([])
 	/* const [ error, setError] = useState(false)
 	const [ errorMessage, setErrorMessage ] = useState( false ) */
 	const [ isLogin, setIsLogin ] = useState(true)
@@ -38,11 +38,11 @@ function AddPost({history, setPropsUpdate, propsUpdate}) {
 	const resetForm = () => {
 		setTitle( '' )
 		setText( '' )
-		setImageSrc(null)
+		setImageSrc([])
 	}
 
 	const previewImage = useMemo(() => {
-		return imageSrc ? URL.createObjectURL(imageSrc): null
+		return imageSrc > 0 ? imageSrc.forEach(elem => elem.URL.createObjectURL(imageSrc) ): null
 	}, [ imageSrc ] )
 
 	const handleSubmit = async evt => {
@@ -51,8 +51,9 @@ function AddPost({history, setPropsUpdate, propsUpdate}) {
 		const postData = new FormData()
 		postData.append('title', title)
 		postData.append('text', text)
-		postData.append('imageSrc', imageSrc)
-
+		for(let i=0; i < imageSrc.length; i++){
+			postData.append('imageSrc', imageSrc[i])
+		}
 		const response = await api.post( '/api/post', postData, { headers: { Authorization: localStorage.getItem( 'token' ) } } )
 		.catch(function (error) {
 				 //Please Authenticate or whatever returned from server
@@ -75,6 +76,7 @@ function AddPost({history, setPropsUpdate, propsUpdate}) {
 				resetForm()
 				toast.success('Статья добавлена')
         setPropsUpdate(propsUpdate ? false : true)
+				setAddPostShow(false)
 			} else {
 				const { message } = response.data
 				toast.error(message)
@@ -129,7 +131,8 @@ function AddPost({history, setPropsUpdate, propsUpdate}) {
 								type="file"
 								className="form-control"
 								id="customFile"
-								onChange={(evt) => setImageSrc(evt.target.files[0])}
+								multiple
+								onChange={(evt) => setImageSrc(evt.target.files)}
 							/>
 						</div>
 

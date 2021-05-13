@@ -34,20 +34,25 @@ function SearchContent() {
 					<Col lg="4">
 						<div className="search__content-block">
 							<div className="search__content-block-img text-center">
-								<img
-									className="img-fluid"
-									src={server.url + house.imageSrc[0]}
-									alt=""
-								/>
+								<Link to={`/housecard/${house._id}`}>
+									<img
+										className="img-fluid"
+										src={server.url + house.imageSrc[0]}
+										alt=""
+									/>
+								</Link>
 							</div>
 						</div>
-						<div className="mt-4 search__block-seller d-flex align-items-center justify-content-center">
-							<img
-								className="img-fluid seller__logo shadow-1-strong"
-								src={company.filter(company => company._id === house.company).map(logo => (server.url + logo.logoSrc))}
-								alt={company.filter(company => company._id === house.company).map(company => (company.name))}
-							/>
-						</div>
+						<Link to={`/company/`}>
+							<div className="mt-4 search__block-seller d-flex align-items-center justify-content-center">
+								<img
+									className="img-fluid seller__logo shadow-1-strong"
+									src={company.filter(company => company._id === house.company).map(logo => (server.url + logo.logoSrc))}
+									alt={company.filter(company => company._id === house.company).map(company => (company.name))}
+								/>
+								<span className="seller__name">{company.filter(company => company._id === house.company).map(name => (name.name))}</span>
+							</div>
+						</Link>
 					</Col>
 					<Col lg="4">
 						<div className="search__content-block">

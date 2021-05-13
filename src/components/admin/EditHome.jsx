@@ -14,13 +14,12 @@ toast.configure()
 function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 	const [ modal, setModal ] = useState(false)
 	const [ isLogin, setIsLogin ] = useState( true )
-	const [ id, setId ] = useState(house._id)
 	const [ name, setName ] = useState(house.name)
-	const [ countryId, setCountryId ] = useState( '' )
-	const [ countryName, setCountryName ] = useState([])
-	const [ companyId, setCompanyId ] = useState(house.companyId)
-	const [ companyName, setCompanyName ] = useState([])
-	const [ cityId, setCityId ] = useState( '' )
+	const [ countryId, setCountryId ] = useState( house.country )
+	const [ countryName, setCountryName ] = useState( [] )
+	const [ companyId, setCompanyId ] = useState(house.company)
+	const [ companyName, setCompanyName ] = useState( [] )
+	const [ cityId, setCityId ] = useState( house.city )
 	const [ cityName, setCityName ] = useState( [] )
 	const [ address, setAddress ] = useState( house.address )
 	const [ description, setDescription ] = useState( house.description )
@@ -107,7 +106,6 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 
 
 	const resetForm = () => {
-		setId( house._id )
 		setName( house.name )
 		setAddress( house.address )
 		setDescription( house.description )
@@ -187,7 +185,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 		toggle()
 		const houseData = new FormData()
 
-		houseData.append('_id', id)
+		//houseData.append('_id', id)
 		houseData.append('name', name)
 		houseData.append('company', companyId)
 		houseData.append('country', countryId)
@@ -284,12 +282,13 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
         isOpen={modal}
         toggle={toggle}
       >
-        <ModalHeader toggle={() => toggle()}>Редактировать статью</ModalHeader>
+        <ModalHeader toggle={() => toggle()}>Редактировать дом</ModalHeader>
         <ModalBody>
 					<Container>
 						<Row>
 							<Col md={ 8 } >
 								<form onSubmit={handleSubmit}>
+                  <div class="key-filed mb-2">Название</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_name"
@@ -303,35 +302,42 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Выберите компанию</div>
 									<div className="input-group  mb-3">
 										<select className="form-select flex-nowrap" aria-label="Default select example" onChange={ evt => setCompanyId( evt.target.value ) }>
 											<option defaultValue>Выберите компанию</option>
-											{companyName.map(company => (
-												<option value={ company._id } key={company._id} >{company.name}</option>
-										))}
+											{companyName.map(company => {
+                        if (companyId === company._id) return <option value={ company._id } key={company._id} selected>{company.name}</option>
+												return <option value={ company._id } key={company._id}>{company.name}</option>
+										})}
 										</select>
 									</div>
 
+                  <div class="key-filed mb-2">Выберите страну</div>
 									<div className="input-group  mb-3">
 
 										<select className="form-select flex-nowrap" aria-label="Default select example" onChange={ evt => setCountryId( evt.target.value ) }>
 											<option defaultValue>Выберите страну</option>
-											{countryName.map(country => (
-												<option value={ country._id } key={country._id} >{country.country}</option>
-										))}
+                      {countryName.map(country => {
+                        if (countryId === country._id) return <option value={ country._id } key={country._id} selected>{country.country}</option>
+												return <option value={ country._id } key={country._id}>{country.country}</option>
+										})}
 										</select>
 									</div>
 
+                  <div class="key-filed mb-2">Выберите город</div>
 									<div className="input-group  mb-3">
 
 										<select className="form-select flex-nowrap" aria-label="Default select example" onChange={ evt => setCityId( evt.target.value ) }>
 											<option defaultValue>Выберите город</option>
-											{cityName.map(city => (
-												<option value={ city._id } key={city._id} >{city.city}</option>
-										))}
+                      {cityName.map(city => {
+                        if (cityId === city._id) return <option value={ city._id } key={city._id} selected>{city.city}</option>
+												return <option value={ city._id } key={city._id}>{city.city}</option>
+										})}
 										</select>
 									</div>
 
+                  <div class="key-filed mb-2">Адрес</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_address"
@@ -345,6 +351,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Изображения</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											type="file"
@@ -356,6 +363,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Схемы</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											type="file"
@@ -367,6 +375,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Площадь</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_area"
@@ -381,6 +390,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Жилая площадь</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_livingArea"
@@ -395,6 +405,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Кухня</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_kitchen"
@@ -409,6 +420,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Гостиная</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_livingRoom"
@@ -423,6 +435,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Размеры</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_sizes"
@@ -437,6 +450,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Количество этажей</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_level"
@@ -451,6 +465,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Количество комнат</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_rooms"
@@ -465,6 +480,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Количество санузлов</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_bathRooms"
@@ -479,14 +495,25 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Котельная</div>
 									<div className="input-group flex-nowrap mb-3">
 										<select className="form-select flex-nowrap" aria-label="Default select example" onChange={ evt => setBoilerRoom( evt.target.value ) }>
 											<option defaultValue>Котельная</option>
-											<option value={true} key='boilerRoomTrue' >Есть</option>
-											<option value={false} key='boilerRoomFalse'>Нет</option>
+                      {boilerRoom === true ?
+                      <>
+											<option value={true} key='boilerRoomTrue' selected>Есть</option>
+                      <option value={false} key='boilerRoomFalse'>Нет</option>
+                      </>
+											:
+                      <>
+											<option value={true} key='boilerRoomTrue'>Есть</option>
+                      <option value={false} key='boilerRoomFalse' selected>Нет</option>
+                      </>
+                      }
 										</select>
 									</div>
 
+                  <div class="key-filed mb-2">Технология строительства</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_constructionTechnology"
@@ -501,6 +528,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Комплектация</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_equipment"
@@ -515,6 +543,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Подготовительные работы</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_preliminaries"
@@ -529,6 +558,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Фундамент</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_foundation"
@@ -543,6 +573,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Стены</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_walls"
@@ -557,6 +588,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Кровля</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_roof"
@@ -571,14 +603,25 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Антисептирование</div>
 									<div className="input-group flex-nowrap mb-3">
 										<select className="form-select flex-nowrap" aria-label="Default select example" onChange={ evt => setAntiseptization( evt.target.value ) }>
 											<option defaultValue>Антисептирование</option>
-											<option value={true} key='boilerRoomTrue' >Есть</option>
-											<option value={false} key='boilerRoomFalse'>Нет</option>
+                      {antiseptization === true ?
+                      <>
+											<option value={true} key='boilerRoomTrue' selected>Есть</option>
+                      <option value={false} key='boilerRoomFalse'>Нет</option>
+                      </>
+											:
+                      <>
+											<option value={true} key='boilerRoomTrue'>Есть</option>
+                      <option value={false} key='boilerRoomFalse' selected>Нет</option>
+                      </>
+                      }
 										</select>
 									</div>
 
+                  <div class="key-filed mb-2">Внутренняя отделка</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_interiorDecoration"
@@ -593,6 +636,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Наружняя отделка фасада</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_exteriorFacadeFinishing"
@@ -607,6 +651,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Форма крыши</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_shapeRoof"
@@ -621,6 +666,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Кровля</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_houseTop"
@@ -635,70 +681,151 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Утепление крыши</div>
 									<div className="input-group flex-nowrap mb-3">
 										<select className="form-select flex-nowrap" aria-label="Default select example" onChange={ evt => setRoofInsulation( evt.target.value ) }>
 											<option defaultValue>Утепление крыши</option>
-											<option value={true} key='boilerRoomTrue' >Есть</option>
-											<option value={false} key='boilerRoomFalse'>Нет</option>
+                      {roofInsulation === true ?
+                      <>
+											<option value={true} key='boilerRoomTrue' selected>Есть</option>
+                      <option value={false} key='boilerRoomFalse'>Нет</option>
+                      </>
+											:
+                      <>
+											<option value={true} key='boilerRoomTrue'>Есть</option>
+                      <option value={false} key='boilerRoomFalse' selected>Нет</option>
+                      </>
+                      }
 										</select>
 									</div>
 
+                  <div class="key-filed mb-2">Водосточная система</div>
 									<div className="input-group flex-nowrap mb-3">
 										<select className="form-select flex-nowrap" aria-label="Default select example" onChange={ evt => setDrainageSystem( evt.target.value ) }>
 											<option defaultValue>Водосточная система</option>
-											<option value={true} key='boilerRoomTrue' >Есть</option>
-											<option value={false} key='boilerRoomFalse'>Нет</option>
+                      {drainageSystem === true ?
+                      <>
+											<option value={true} key='boilerRoomTrue' selected>Есть</option>
+                      <option value={false} key='boilerRoomFalse'>Нет</option>
+                      </>
+											:
+                      <>
+											<option value={true} key='boilerRoomTrue'>Есть</option>
+                      <option value={false} key='boilerRoomFalse' selected>Нет</option>
+                      </>
+                      }
 										</select>
 									</div>
 
+                  <div class="key-filed mb-2">Инженерные коммуникации</div>
 									<div className="input-group flex-nowrap mb-3">
 										<select className="form-select flex-nowrap" aria-label="Default select example" onChange={ evt => setCommunications( evt.target.value ) }>
 											<option defaultValue>Инженерные коммуникации</option>
-											<option value={true} key='boilerRoomTrue' >Есть</option>
-											<option value={false} key='boilerRoomFalse'>Нет</option>
+                      {communications === true ?
+                      <>
+											<option value={true} key='boilerRoomTrue' selected>Есть</option>
+                      <option value={false} key='boilerRoomFalse'>Нет</option>
+                      </>
+											:
+                      <>
+											<option value={true} key='boilerRoomTrue'>Есть</option>
+                      <option value={false} key='boilerRoomFalse' selected>Нет</option>
+                      </>
+                      }
 										</select>
 									</div>
 
+                  <div class="key-filed mb-2">Электропроводка</div>
 									<div className="input-group flex-nowrap mb-3">
 										<select className="form-select flex-nowrap" aria-label="Default select example" onChange={ evt => setElectricalWiring( evt.target.value ) }>
 											<option defaultValue>Электропроводка</option>
-											<option value={true} key='boilerRoomTrue' >Есть</option>
-											<option value={false} key='boilerRoomFalse'>Нет</option>
+                      {electricalWiring === true ?
+                      <>
+											<option value={true} key='boilerRoomTrue' selected>Есть</option>
+                      <option value={false} key='boilerRoomFalse'>Нет</option>
+                      </>
+											:
+                      <>
+											<option value={true} key='boilerRoomTrue'>Есть</option>
+                      <option value={false} key='boilerRoomFalse' selected>Нет</option>
+                      </>
+                      }
 										</select>
 									</div>
 
+                  <div class="key-filed mb-2">Водоснабжение</div>
 									<div className="input-group flex-nowrap mb-3">
 										<select className="form-select flex-nowrap" aria-label="Default select example" onChange={ evt => setWaterSupply( evt.target.value ) }>
 											<option defaultValue>Водоснабжение</option>
-											<option value={true} key='boilerRoomTrue' >Есть</option>
-											<option value={false} key='boilerRoomFalse'>Нет</option>
+                      {waterSupply === true ?
+                      <>
+											<option value={true} key='boilerRoomTrue' selected>Есть</option>
+                      <option value={false} key='boilerRoomFalse'>Нет</option>
+                      </>
+											:
+                      <>
+											<option value={true} key='boilerRoomTrue'>Есть</option>
+                      <option value={false} key='boilerRoomFalse' selected>Нет</option>
+                      </>
+                      }
 										</select>
 									</div>
 
+                  <div class="key-filed mb-2">Канализация</div>
 									<div className="input-group flex-nowrap mb-3">
 										<select className="form-select flex-nowrap" aria-label="Default select example" onChange={ evt => setCanalization( evt.target.value ) }>
 											<option defaultValue>Канализация</option>
-											<option value={true} key='boilerRoomTrue' >Есть</option>
-											<option value={false} key='boilerRoomFalse'>Нет</option>
+                      {canalization === true ?
+                      <>
+											<option value={true} key='boilerRoomTrue' selected>Есть</option>
+                      <option value={false} key='boilerRoomFalse'>Нет</option>
+                      </>
+											:
+                      <>
+											<option value={true} key='boilerRoomTrue'>Есть</option>
+                      <option value={false} key='boilerRoomFalse' selected>Нет</option>
+                      </>
+                      }
 										</select>
 									</div>
 
+                  <div class="key-filed mb-2">Отопление</div>
 									<div className="input-group flex-nowrap mb-3">
 										<select className="form-select flex-nowrap" aria-label="Default select example" onChange={ evt => setHeating( evt.target.value ) }>
 											<option defaultValue>Отопление</option>
-											<option value={true} key='boilerRoomTrue' >Есть</option>
-											<option value={false} key='boilerRoomFalse'>Нет</option>
+                      {heating === true ?
+                      <>
+											<option value={true} key='boilerRoomTrue' selected>Есть</option>
+                      <option value={false} key='boilerRoomFalse'>Нет</option>
+                      </>
+											:
+                      <>
+											<option value={true} key='boilerRoomTrue'>Есть</option>
+                      <option value={false} key='boilerRoomFalse' selected>Нет</option>
+                      </>
+                      }
 										</select>
 									</div>
 
+                  <div class="key-filed mb-2">Вентиляция</div>
 									<div className="input-group flex-nowrap mb-3">
 										<select className="form-select flex-nowrap" aria-label="Default select example" onChange={ evt => setVentilation( evt.target.value ) }>
 											<option defaultValue>Вентиляция</option>
-											<option value={true} key='boilerRoomTrue' >Есть</option>
-											<option value={false} key='boilerRoomFalse'>Нет</option>
+                      {ventilation === true ?
+                      <>
+											<option value={true} key='boilerRoomTrue' selected>Есть</option>
+                      <option value={false} key='boilerRoomFalse'>Нет</option>
+                      </>
+											:
+                      <>
+											<option value={true} key='boilerRoomTrue'>Есть</option>
+                      <option value={false} key='boilerRoomFalse' selected>Нет</option>
+                      </>
+                      }
 										</select>
 									</div>
 
+                  <div class="key-filed mb-2">Изменение конструкции</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_designChange"
@@ -713,6 +840,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Опции</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_options"
@@ -728,6 +856,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Подарки</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_present"
@@ -742,6 +871,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Дополнительно</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_additionally"
@@ -757,6 +887,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Гарантия</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_warranty"
@@ -771,6 +902,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Ссылка</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_link"
@@ -785,6 +917,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Статус</div>
 									<div className="input-group flex-nowrap mb-3">
 										<input
 											id="house_status"
@@ -799,6 +932,7 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
+                  <div class="key-filed mb-2">Описание</div>
 									<div className="input-group flex-nowrap mb-3">
 										<textarea
 											id="house_description"
@@ -813,7 +947,8 @@ function EditHome({history, house, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
-									<div className="input-group flex-nowrap mb-3">
+                  <div class="key-filed mb-2">Цена</div>
+									<div className="input-group mb-3">
 										<input
 											id="house_price"
 											type="number"

@@ -42,7 +42,7 @@ function AllCompany(props) {
 
 	const addCompanyBlock = () => ( <div className="">
 		<MDBBtn onClick={ () => handleSubmit( false ) } color="primary" className="btn mb-4">Закрыть</MDBBtn>
-		<AddCompany handleSubmit setPropsUpdate={setPropsUpdate} propsUpdate={propsUpdate} />
+		<AddCompany handleSubmit setPropsUpdate={setPropsUpdate} propsUpdate={propsUpdate} setAddCompanyShow={setAddCompanyShow} />
 	</div> )
 
 	const deleteCompanyHandler = async (companyId) => {

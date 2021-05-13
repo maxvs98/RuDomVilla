@@ -82,16 +82,16 @@ function AllHomes(props) {
 
 	const addHomeBlock = () => ( <div className="">
 		<MDBBtn onClick={ () => handleSubmit( false ) } color="primary" className="btn mb-4">Закрыть</MDBBtn>
-		<AddHome handleSubmit setPropsUpdate={setPropsUpdate} propsUpdate={propsUpdate} />
+		<AddHome handleSubmit setPropsUpdate={setPropsUpdate} propsUpdate={propsUpdate} setAddHomeShow={setAddHomeShow} />
 	</div>	)
-
 
 	return (
 		<>
 			<div className="home__add">
 				{addHomeShow ? addHomeBlock() : <MDBBtn onClick={ () => setAddHomeShow( true ) } color="success" className="btn">Добавить дом</MDBBtn> }
 			</div>
-			<div className="">
+
+			<Row className="mt-3">
 				{/* {error ? (
 						<div className="alert alert-danger login-msg" role="alert">
 							{messageHandler}
@@ -191,7 +191,7 @@ function AllHomes(props) {
 						<hr className="mt-2 mb-4" />
 					</Row>
 				))}
-			</div>
+			</Row>
 		</>
 	)
 }

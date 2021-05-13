@@ -66,7 +66,9 @@ function EditPost({history, post, setPropsUpdate, propsUpdate}) {
 		postData.append('_id', id)
 		postData.append('title', title)
 		postData.append('text', text)
-		postData.append('imageSrc', imageSrc)
+		for(let i=0; i < imageSrc.length; i++){
+			postData.append('imageSrc', imageSrc[i])
+		}
 
 		const response = await api.patch( `/api/post/${ post._id }`, postData, { headers: { Authorization: localStorage.getItem( 'token' ) } } )
 		.catch(function (error) {
@@ -148,14 +150,15 @@ function EditPost({history, post, setPropsUpdate, propsUpdate}) {
 										/>
 									</div>
 
-									<div className="input-group flex-nowrap mb-3">
-										<input
-											type="file"
-											className="form-control"
-											id="customFile"
-											onChange={(evt) => setImageSrc(evt.target.files[0])}
-										/>
-									</div>
+                  <div className="input-group flex-nowrap mb-3">
+      							<input
+      								type="file"
+      								className="form-control"
+      								id="customFile"
+      								multiple
+      								onChange={(evt) => setImageSrc(evt.target.files)}
+      							/>
+      						</div>
 
 									{/* {error ? (
 										<div className="alert alert-danger login-msg" role="alert">

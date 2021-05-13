@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import api from '../../services/api'
 
 toast.configure()
-function AddHome({history, setPropsUpdate, propsUpdate}) {
+function AddHome({history, setPropsUpdate, propsUpdate, setAddHomeShow}) {
 	const [ isLogin, setIsLogin ] = useState( true )
 	const [ name, setName ] = useState('')
 	const [ countryId, setCountryId ] = useState( '' )
@@ -241,6 +241,7 @@ function AddHome({history, setPropsUpdate, propsUpdate}) {
 				resetForm()
 				toast.success('Успешно добавлен')
         setPropsUpdate(propsUpdate ? false : true)
+				setAddHomeShow(false)
 			} else {
 				const {message} = response.data
 					/* setError(true)
