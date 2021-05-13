@@ -43,7 +43,7 @@ function SearchContent() {
 								</Link>
 							</div>
 						</div>
-						<Link to={`/company/`}>
+						<Link to={`/companycard/${company.filter(company => company._id === house.company).map(company => (company._id))}`}>
 							<div className="mt-4 search__block-seller d-flex align-items-center justify-content-center">
 								<img
 									className="img-fluid seller__logo shadow-1-strong"

@@ -79,6 +79,8 @@ function AllCompany(props) {
 		}
 	}
 
+	console.log(company[0])
+
 	return (
 		<>
 			<div className="company__add">

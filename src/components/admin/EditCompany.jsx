@@ -17,14 +17,14 @@ function EditCompany({history, company, setPropsUpdate, propsUpdate}) {
 	const [ modal, setModal ] = useState(false)
 	const [ id, setId ] = useState(company._id)
 	const [ name, setName ] = useState(company.name)
-	const [ country, setCountry ] = useState( '' )
+	const [ country, setCountry ] = useState( company.country )
 	const [ countryName, setCountryName ] = useState([])
-	const [ city, setCity ] = useState( '' )
+	const [ city, setCity ] = useState( company.city )
 	const [ cityName, setCityName ] = useState( [] )
 	const [ address, setAddress ] = useState( company.address )
 	const [ description, setDescription ] = useState( company.description )
 	const [ image, setImage ] = useState(company.image)
-	const [ logotype, setLogotype ] = useState(company.logotype)
+	const [ logotype, setLogotype ] = useState(company.logoSrc)
 	const [ link, setLink ] = useState(company.link)
 	/* const [ error, setError] = useState(false)
 	const [ errorMessage, setErrorMessage ] = useState( false ) */
@@ -56,7 +56,7 @@ function EditCompany({history, company, setPropsUpdate, propsUpdate}) {
 		setAddress(company.address)
 		setDescription(company.description)
 		setImage(company.image)
-		setLogotype(company.logotype)
+		setLogotype(company.logoSrc)
 		setLink(company.link)
 	}
 
@@ -180,9 +180,10 @@ function EditCompany({history, company, setPropsUpdate, propsUpdate}) {
 
                     <select className="form-select flex-nowrap" aria-label="Default select example" onChange={ evt => setCountry( evt.target.value ) }>
                       <option defaultValue>Выберите страну</option>
-                      {countryName.map(country => (
-                        <option value={ country._id } key={country._id} >{country.country}</option>
-                    ))}
+                      {countryName.map(countryItem => {
+                        if (country === countryItem._id) return <option value={ countryItem._id } key={countryItem._id} selected>{countryItem.country}</option>
+												return <option value={ countryItem._id } key={countryItem._id}>{countryItem.country}</option>
+										})}
                     </select>
                   </div>
 
@@ -190,9 +191,10 @@ function EditCompany({history, company, setPropsUpdate, propsUpdate}) {
 
                     <select className="form-select flex-nowrap" aria-label="Default select example" onChange={ evt => setCity( evt.target.value ) }>
                       <option defaultValue>Выберите город</option>
-                      {cityName.map(city => (
-                        <option value={ city._id } key={city._id} >{city.city}</option>
-                    ))}
+                      {cityName.map(cityItem => {
+                        if (city === cityItem._id) return <option value={ cityItem._id } key={cityItem._id} selected>{cityItem.city}</option>
+												return <option value={ cityItem._id } key={cityItem._id}>{cityItem.city}</option>
+										})}
                     </select>
                   </div>
 
@@ -210,24 +212,24 @@ function EditCompany({history, company, setPropsUpdate, propsUpdate}) {
                   </div>
 
                   <div className="input-group flex-nowrap mb-3">
-                    <input
-                      type="file"
-                      className="form-control"
-                      id="customFileLogo"
-                      onChange={(evt) => setLogotype(evt.target.files[0])}
+      							<input
+      								type="file"
+      								className="form-control"
+      								id="customFileLogo"
+      								onChange={(evt) => setLogotype(evt.target.files[0])}
 
-                    />
-                  </div>
+      							/>
+      						</div>
 
-                  <div className="input-group flex-nowrap mb-3">
-                    <input
-                      type="file"
-                      className="form-control"
-                      id="customFile"
-                      onChange={(evt) => setImage(evt.target.files[0])}
+      						<div className="input-group flex-nowrap mb-3">
+      							<input
+      								type="file"
+      								className="form-control"
+      								id="customFile"
+      								onChange={(evt) => setImage(evt.target.files[0])}
 
-                    />
-                  </div>
+      							/>
+      						</div>
 
                   <div className="input-group flex-nowrap mb-3">
                     <input
